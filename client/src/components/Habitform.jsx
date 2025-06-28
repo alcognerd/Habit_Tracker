@@ -67,7 +67,7 @@ export const Habitform = () => {
 
             <div>
               <label className="block font-semibold mb-1 text-gray-700">Category</label>
-              <select name="category" value={form.category} onChange={handleChange} className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400">
+              <select name="category" value={form.category} onChange={handleChange} className="w-full p-3 border border-black-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400">
                 <option value="">Select a category</option>
                 <option>Health</option>
                 <option>Running</option>
