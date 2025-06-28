@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import './Habitform.css'; // Custom CSS for shake animation
+import React, { useState, useEffect } from 'react';
+
 
 export const Habitform = () => {
   const [form, setForm] = useState({
@@ -8,11 +8,13 @@ export const Habitform = () => {
     day: '',
     category: '',
     startDate: '',
-    endDate: '',
-    schedule: ''
+    endDate: ''
   });
 
   const [shake, setShake] = useState(false);
+  
+
+  
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -20,29 +22,36 @@ export const Habitform = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
     const hasEmpty = Object.values(form).some((value) => value === '');
     if (hasEmpty) {
       setShake(true);
       setTimeout(() => setShake(false), 500); // Reset shake after animation
     } else {
       alert('Form Submitted Successfully!');
-      // Add your submit logic here
+      // You can send form data to backend or store it
     }
   };
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-200 px-4">
+      
       <div className="bg-white border border-gray-300 rounded-xl p-8 w-full max-w-4xl shadow-md">
-        <h2 className="text-4xl font-extrabold text-center mb-6">
-          <span className="text-5xl text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-cyan-500 to-blue-600">H</span>
-          ABIT FORM
-        </h2>
+     {/* Image added here */}
+ <div className="bg-white">
+  <img
+    src="/b.jpg"
+    alt="How to Form Good Habits"
+    className="mx-auto w-[180px] h-auto object-contain rounded"
+  />
+</div>
+
+
 
         <form onSubmit={handleSubmit}>
           <div className="bg-gray-100 p-6 rounded-lg shadow-inner space-y-4">
+
             <div>
-              <label className="block font-semibold mb-1">Today Plan</label>
+              <label className="block font-semibold mb-1">Title</label>
               <input type="text" name="plan" value={form.plan} onChange={handleChange} placeholder="Enter the habit" className="w-full p-2 border rounded-md" />
             </div>
 
@@ -62,8 +71,10 @@ export const Habitform = () => {
                 <option>Friday</option>
                 <option>Saturday</option>
                 <option>Sunday</option>
+                <option>Everyday</option>
               </select>
             </div>
+
 
             <div>
               <label className="block font-semibold mb-1 text-gray-700">Category</label>
@@ -90,32 +101,28 @@ export const Habitform = () => {
               </div>
             </div>
 
-            <div>
-              <label className="block font-semibold mb-1">Schedule Date</label>
-              <input type="datetime-local" name="schedule" value={form.schedule} onChange={handleChange} className="w-full p-2 border rounded-md" />
-            </div>
+            
 
             <div className="flex justify-between pt-4">
               <button
                 type="submit"
-                className={`${
-                  shake ? 'shake' : ''
-                } bg-gradient-to-r from-green-400 to-green-600 text-white px-6 py-2 rounded-lg shadow-md hover:shadow-lg transition duration-200 font-semibold`}
+                className={`${shake ? 'shake' : ''} bg-gradient-to-r from-green-400 to-green-600 text-white px-6 py-2 rounded-lg shadow-md hover:shadow-lg transition duration-200 font-semibold`}
               >
-                Submit
+                Schedule Now
               </button>
               <button
                 type="reset"
                 className="bg-gradient-to-r from-red-400 to-red-600 text-white px-6 py-2 rounded-lg shadow-md hover:shadow-lg transition duration-200 font-semibold"
-                onClick={() => setForm({
-                  plan: '',
-                  description: '',
-                  day: '',
-                  category: '',
-                  startDate: '',
-                  endDate: '',
-                  schedule: ''
-                })}
+                onClick={() =>
+                  setForm({
+                    plan: '',
+                    description: '',
+                    day: '',
+                    category: '',
+                    startDate: '',
+                    endDate: '',
+                  })
+                }
               >
                 Reset
               </button>
